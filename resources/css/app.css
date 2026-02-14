@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Noto+Kufi+Arabic:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  html {
+    @apply antialiased scroll-smooth;
+  }
+
+  html[dir='rtl'] {
+    font-family: 'Noto Kufi Arabic', 'Inter', system-ui, sans-serif;
+  }
+
+  body {
+    @apply bg-neutral text-text;
+  }
+
+  ::selection {
+    @apply bg-gold/30 text-night;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-gold;
+  }
+
+  * {
+    @apply scroll-smooth;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-gold px-6 py-3 font-semibold text-night
+           transition-all duration-200 hover:bg-gold-light hover:shadow-lg hover:shadow-gold/20
+           active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:active:scale-100;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border-2 border-sandstone px-6 py-3
+           font-semibold text-text transition-all duration-200 hover:bg-sandstone hover:text-white
+           active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 font-medium text-text
+           transition-all duration-200 hover:bg-night/5 active:scale-[0.98]
+           focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold;
+  }
+
+  .input-field {
+    @apply w-full rounded-lg border border-sandstone/30 bg-white px-4 py-3 text-text
+           placeholder:text-text/40 transition-all duration-200
+           focus:border-gold focus:ring-2 focus:ring-gold/20 focus:outline-none
+           disabled:bg-neutral disabled:cursor-not-allowed;
+  }
+
+  .card {
+    @apply rounded-2xl bg-white shadow-sm border border-sandstone/10 overflow-hidden
+           transition-all duration-300 hover:shadow-md hover:shadow-sandstone/10;
+  }
+
+  .skeleton {
+    @apply bg-shimmer bg-shimmer animate-shimmer rounded-lg;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold;
+  }
+
+  .sticky-header {
+    @apply sticky top-0 z-50 backdrop-blur-xl bg-white/80 border-b border-sandstone/10;
+  }
+
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 xl:px-12;
+  }
+
+  .max-container {
+    @apply mx-auto max-w-7xl;
+  }
+
+  .bottom-sheet {
+    @apply fixed inset-x-0 bottom-0 z-40 rounded-t-3xl bg-white shadow-2xl shadow-night/20
+           transform transition-transform duration-300 ease-out;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

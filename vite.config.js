@@ -7,6 +7,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': resolve(__dirname, 'resources/js'),
+      '@inertiajs/react': resolve(__dirname, 'resources/js/lib/inertia-shim.jsx'),
     },
   },
   build: {

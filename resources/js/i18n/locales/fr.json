@@ -34,9 +34,22 @@
     "subscribeSuccess": "Merci pour votre inscription !",
     "capacity": "35 000 places",
     "founded": "Construit en 238 ap. J.-C.",
-    "acoustics": "Acoustique exceptionnelle"
+    "acoustics": "Acoustique exceptionnelle",
+    "nextEdition": "Prochaine édition",
+    "days": "Jours",
+    "hours": "Heures",
+    "minutes": "Min",
+    "seconds": "Sec",
+    "season": "Saison 2026",
+    "heritage": "Patrimoine",
+    "pastEditions": "Éditions précédentes",
+    "spectators": "spectateurs",
+    "testimonials": "Ce qu'ils en disent",
+    "stayTuned": "Restez informé",
+    "partners": "Nos Partenaires"
   },
   "program": {
+    "july": "Juillet",
     "title": "Programme",
     "subtitle": "Découvrez les concerts de cette saison",
     "filters": "Filtres",

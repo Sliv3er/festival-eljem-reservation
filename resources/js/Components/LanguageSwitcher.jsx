@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import useLocale from '../hooks/useLocale';
 
-export default function LanguageSwitcher({ compact = false }) {
+export default function LanguageSwitcher({ compact = false, scrolled = true }) {
   const { locale, setLocale, locales } = useLocale();
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
@@ -20,7 +20,9 @@ export default function LanguageSwitcher({ compact = false }) {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-text/80 transition-colors hover:bg-sandstone/10 hover:text-text focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+        className={`flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${
+          scrolled ? 'text-text/80 hover:bg-sandstone/10 hover:text-text' : 'text-white/80 hover:bg-white/10 hover:text-white'
+        }`}
         aria-expanded={open}
         aria-haspopup="listbox"
         aria-label="Change language"

@@ -22,11 +22,11 @@ export default function Register() {
       <Head title={t('auth.registerTitle')} />
 
       <div>
-        <h1 className="text-2xl font-display font-bold text-text">{t('auth.registerTitle')}</h1>
-        <p className="mt-2 text-sm text-text/60">{t('auth.registerSubtitle')}</p>
+        <h1 className="text-xl font-display font-bold text-text">{t('auth.registerTitle')}</h1>
+        <p className="mt-1 text-sm text-text/60">{t('auth.registerSubtitle')}</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+      <form onSubmit={handleSubmit} className="mt-4 space-y-3">
         <Input
           label={t('auth.name')}
           value={form.name}
@@ -68,7 +68,7 @@ export default function Register() {
         </Button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-text/60">
+      <p className="mt-3 text-center text-sm text-text/60">
         {t('auth.hasAccount')}{' '}
         <Link href="/login" className="font-medium text-gold hover:text-gold-light">
           {t('auth.login')}

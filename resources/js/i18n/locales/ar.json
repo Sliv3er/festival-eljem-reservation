@@ -34,9 +34,22 @@
     "subscribeSuccess": "شكراً لاشتراكك!",
     "capacity": "35,000 مقعد",
     "founded": "بُني عام 238 م",
-    "acoustics": "صوتيات استثنائية"
+    "acoustics": "صوتيات استثنائية",
+    "nextEdition": "الإصدار القادم",
+    "days": "أيام",
+    "hours": "ساعات",
+    "minutes": "دقائق",
+    "seconds": "ثوانٍ",
+    "season": "موسم 2026",
+    "heritage": "التراث",
+    "pastEditions": "الإصدارات السابقة",
+    "spectators": "متفرج",
+    "testimonials": "ماذا يقولون",
+    "stayTuned": "ابقَ على اطلاع",
+    "partners": "شركاؤنا"
   },
   "program": {
+    "july": "يوليو",
     "title": "البرنامج",
     "subtitle": "اكتشف حفلات هذا الموسم",
     "filters": "التصفية",

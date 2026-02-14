@@ -24,13 +24,13 @@ export default function Login() {
       <Head title={t('auth.loginTitle')} />
 
       <div>
-        <h1 className="text-2xl font-display font-bold text-text">{t('auth.loginTitle')}</h1>
-        <p className="mt-2 text-sm text-text/60">{t('auth.loginSubtitle')}</p>
+        <h1 className="text-xl font-display font-bold text-text">{t('auth.loginTitle')}</h1>
+        <p className="mt-1 text-sm text-text/60">{t('auth.loginSubtitle')}</p>
       </div>
 
-      {errors.general && <Alert variant="error" className="mt-4">{errors.general}</Alert>}
+      {errors.general && <Alert variant="error" className="mt-3">{errors.general}</Alert>}
 
-      <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+      <form onSubmit={handleSubmit} className="mt-5 space-y-3.5">
         <Input
           label={t('auth.email')}
           type="email"
@@ -70,7 +70,7 @@ export default function Login() {
         </Button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-text/60">
+      <p className="mt-4 text-center text-sm text-text/60">
         {t('auth.noAccount')}{' '}
         <Link href="/register" className="font-medium text-gold hover:text-gold-light">
           {t('auth.register')}

@@ -34,9 +34,22 @@
     "subscribeSuccess": "Thank you for subscribing!",
     "capacity": "35,000 seats",
     "founded": "Built 238 AD",
-    "acoustics": "Exceptional acoustics"
+    "acoustics": "Exceptional acoustics",
+    "nextEdition": "Next Edition",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Min",
+    "seconds": "Sec",
+    "season": "Season 2026",
+    "heritage": "Heritage",
+    "pastEditions": "Past Editions",
+    "spectators": "spectators",
+    "testimonials": "What People Say",
+    "stayTuned": "Stay Tuned",
+    "partners": "Our Partners"
   },
   "program": {
+    "july": "July",
     "title": "Program",
     "subtitle": "Discover this season's concerts",
     "filters": "Filters",

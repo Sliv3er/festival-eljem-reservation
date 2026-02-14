@@ -12,12 +12,10 @@ import { getHeroImage, fetchAmphitheatreImages, getImageByCategory } from '../se
 function CountdownUnit({ value, label }) {
   return (
     <div className="flex flex-col items-center">
-      <div className="relative">
-        <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center shadow-gold-glow">
-          <span className="text-3xl sm:text-4xl font-display font-bold text-gold-gradient">{String(value).padStart(2, '0')}</span>
-        </div>
+      <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
+        <span className="text-2xl sm:text-3xl font-display font-bold text-gold">{String(value).padStart(2, '0')}</span>
       </div>
-      <span className="mt-2 text-xs sm:text-sm font-medium text-white/50 uppercase tracking-widest">{label}</span>
+      <span className="mt-1.5 text-[10px] sm:text-xs font-medium text-white/50 uppercase tracking-widest">{label}</span>
     </div>
   );
 }
@@ -66,11 +64,11 @@ export default function Home({ featuredEvents = [] }) {
   ];
 
   return (
-    <AppLayout>
+    <AppLayout transparentHeader>
       <Head title={t('site.name')} />
 
       {/* ============ HERO ============ */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-night">
+      <section className="relative min-h-[75vh] lg:min-h-[85vh] flex items-center justify-center overflow-hidden bg-night -mt-14 lg:-mt-16 pt-14 lg:pt-16">
         {/* Parallax Background */}
         <div className="absolute inset-0">
           <img
@@ -94,8 +92,8 @@ export default function Home({ featuredEvents = [] }) {
           <AmphitheatreArch width={120} height={80} color="#D6B25E" />
         </div>
 
-        <div className="relative z-10 max-container section-padding py-20 text-center">
-          <div className="mx-auto max-w-4xl">
+        <div className="relative z-10 max-container section-padding py-12 lg:py-16 text-center">
+          <div className="mx-auto max-w-3xl">
             {/* Festival badge */}
             <div className="animate-fade-in-up inline-flex items-center gap-2 rounded-full glass px-5 py-2 text-sm font-medium text-gold mb-8">
               <LyreSvg size={18} color="#D6B25E" />
@@ -103,36 +101,26 @@ export default function Home({ featuredEvents = [] }) {
             </div>
 
             {/* Main heading with gold gradient */}
-            <h1 className="animate-fade-in-up-delay text-5xl font-display font-extrabold sm:text-6xl lg:text-7xl xl:text-8xl text-balance leading-[1.1]">
+            <h1 className="animate-fade-in-up-delay text-3xl font-display font-extrabold sm:text-4xl lg:text-5xl xl:text-6xl text-balance leading-[1.1]">
               <span className="text-gold-gradient">{t('site.tagline')}</span>
             </h1>
 
-            <p className="animate-fade-in-up-delay-2 mt-6 text-lg sm:text-xl text-white/60 max-w-2xl mx-auto leading-relaxed">
+            <p className="animate-fade-in-up-delay-2 mt-4 text-base sm:text-lg text-white/60 max-w-xl mx-auto leading-relaxed">
               {t('site.heroSubtitle')}
             </p>
 
-            <div className="animate-fade-in-up-delay-2 mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-              <Button href="/program" size="lg" className="!px-10 !py-4 !text-base shadow-gold-glow-lg">
+            <div className="animate-fade-in-up-delay-2 mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+              <Button href="/program" size="lg" className="!px-8 !py-3 shadow-gold-glow-lg">
                 {t('home.viewProgram')}
-              </Button>
-              <Button href="#countdown" variant="secondary" size="lg" className="!border-white/20 !text-white hover:!bg-white/10 !px-8 !py-4 !text-base">
-                {t('home.upcomingEvents')}
               </Button>
             </div>
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-          <span className="text-[10px] uppercase tracking-[0.3em] text-white/30 font-medium">Scroll</span>
-          <svg className="h-5 w-5 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
-        </div>
       </section>
 
       {/* ============ COUNTDOWN ============ */}
-      <section id="countdown" className="relative bg-night py-20 overflow-hidden">
+      <section id="countdown" className="relative bg-night py-10 overflow-hidden">
         <div className="absolute inset-0 bg-mosaic opacity-50" />
         <div className="relative max-container section-padding text-center">
           <p className="text-sm font-medium uppercase tracking-[0.3em] text-gold/60 mb-4">
@@ -141,7 +129,7 @@ export default function Home({ featuredEvents = [] }) {
           <h2 className="text-2xl sm:text-3xl font-display font-bold text-white mb-2">
             15 {t('program.july') || 'July'} 2026
           </h2>
-          <p className="text-white/40 mb-10">20:30 — Amphithéâtre d'El Jem</p>
+          <p className="text-white/40 mb-6">20:30 — Amphithéâtre d'El Jem</p>
 
           <div className="flex justify-center gap-4 sm:gap-6">
             <CountdownUnit value={countdown.days} label={t('home.days') || 'Days'} />
@@ -158,8 +146,8 @@ export default function Home({ featuredEvents = [] }) {
       </section>
 
       {/* ============ EVENTS CAROUSEL ============ */}
-      <section className="max-container section-padding py-20 lg:py-28">
-        <div className="flex items-end justify-between mb-12">
+      <section className="max-container section-padding py-14 lg:py-14">
+        <div className="flex items-end justify-between mb-8">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-2">{t('home.season') || 'Season 2026'}</p>
             <h2 className="text-3xl font-display font-bold text-text lg:text-4xl">{t('home.upcomingEvents')}</h2>
@@ -194,7 +182,7 @@ export default function Home({ featuredEvents = [] }) {
 
       {/* ============ WHY EL JEM ============ */}
       <section className="bg-night text-white overflow-hidden">
-        <div className="max-container section-padding py-20 lg:py-28">
+        <div className="max-container section-padding py-14 lg:py-14">
           <div className="grid gap-16 lg:grid-cols-12 items-center">
             {/* Text content */}
             <div className="lg:col-span-5">
@@ -294,8 +282,8 @@ export default function Home({ featuredEvents = [] }) {
       </section>
 
       {/* ============ PAST EDITIONS ============ */}
-      <section className="max-container section-padding py-20 lg:py-28">
-        <div className="text-center mb-14">
+      <section className="max-container section-padding py-14 lg:py-14">
+        <div className="text-center mb-10">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold mb-2">{t('home.heritage') || 'Heritage'}</p>
           <h2 className="text-3xl font-display font-bold text-text lg:text-4xl">{t('home.pastEditions') || 'Past Editions'}</h2>
         </div>
@@ -320,9 +308,9 @@ export default function Home({ featuredEvents = [] }) {
       <SectionDivider className="max-container section-padding" />
 
       {/* ============ TESTIMONIALS ============ */}
-      <section className="bg-gradient-to-b from-neutral to-white py-20 lg:py-28">
+      <section className="bg-gradient-to-b from-neutral to-white py-14 lg:py-14">
         <div className="max-container section-padding">
-          <div className="text-center mb-14">
+          <div className="text-center mb-10">
             <LyreSvg size={40} color="#D6B25E" className="mx-auto mb-4" />
             <h2 className="text-3xl font-display font-bold text-text lg:text-4xl">{t('home.testimonials') || 'What People Say'}</h2>
           </div>
@@ -369,7 +357,7 @@ export default function Home({ featuredEvents = [] }) {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 opacity-5">
           <AmphitheatreArch width={600} height={400} color="#D6B25E" />
         </div>
-        <div className="relative max-container section-padding py-20">
+        <div className="relative max-container section-padding py-14">
           <div className="mx-auto max-w-lg text-center">
             <h2 className="text-2xl font-display font-bold text-white mb-2">{t('home.stayTuned') || 'Stay Tuned'}</h2>
             <p className="text-white/50 mb-8">{t('home.newsletterText') || 'Subscribe for early access to tickets and exclusive updates.'}</p>

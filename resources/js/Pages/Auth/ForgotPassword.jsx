@@ -23,13 +23,13 @@ export default function ForgotPassword() {
       <Head title={t('auth.forgotTitle')} />
 
       <div>
-        <h1 className="text-2xl font-display font-bold text-text">{t('auth.forgotTitle')}</h1>
-        <p className="mt-2 text-sm text-text/60">{t('auth.forgotSubtitle')}</p>
+        <h1 className="text-xl font-display font-bold text-text">{t('auth.forgotTitle')}</h1>
+        <p className="mt-1 text-sm text-text/60">{t('auth.forgotSubtitle')}</p>
       </div>
 
-      {sent && <Alert variant="success" className="mt-4">{t('auth.resetSent')}</Alert>}
+      {sent && <Alert variant="success" className="mt-3">{t('auth.resetSent')}</Alert>}
 
-      <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+      <form onSubmit={handleSubmit} className="mt-5 space-y-3.5">
         <Input
           label={t('auth.email')}
           type="email"
@@ -44,7 +44,7 @@ export default function ForgotPassword() {
         </Button>
       </form>
 
-      <p className="mt-6 text-center text-sm text-text/60">
+      <p className="mt-4 text-center text-sm text-text/60">
         <Link href="/login" className="font-medium text-gold hover:text-gold-light">
           {t('auth.login')}
         </Link>

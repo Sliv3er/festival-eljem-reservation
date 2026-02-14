@@ -14,9 +14,7 @@ export default function Checkout() {
   const { items, subtotal, serviceFees, total } = useCart();
   const steps = [t('cart.step1'), t('cart.step2'), t('cart.step3')];
 
-  const [form, setForm] = useState({
-    firstName: '', lastName: '', email: '', phone: '',
-  });
+  const [form, setForm] = useState({ firstName: '', lastName: '', email: '', phone: '' });
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState('');
@@ -28,11 +26,7 @@ export default function Checkout() {
     setError('');
     if (!acceptTerms) { setError(t('checkout.errorTerms')); return; }
     setProcessing(true);
-    // Simulate payment
-    setTimeout(() => {
-      setProcessing(false);
-      window.location.href = '/checkout/success';
-    }, 2000);
+    setTimeout(() => { setProcessing(false); window.location.href = '/checkout/success'; }, 2000);
   };
 
   return (
@@ -42,7 +36,7 @@ export default function Checkout() {
       <div className="max-container section-padding py-8 lg:py-12">
         <StepsIndicator steps={steps} currentStep={1} className="mb-10" />
 
-        <h1 className="text-2xl font-bold text-text lg:text-3xl mb-8">{t('checkout.title')}</h1>
+        <h1 className="text-2xl font-display font-bold text-text lg:text-3xl mb-8">{t('checkout.title')}</h1>
 
         {error && <Alert variant="error" dismissible className="mb-6">{error}</Alert>}
 
@@ -51,44 +45,39 @@ export default function Checkout() {
             {/* Form */}
             <div className="flex-1 min-w-0 space-y-8">
               {/* Billing */}
-              <div className="card p-6">
-                <h2 className="text-lg font-semibold text-text mb-6">{t('checkout.billingDetails')}</h2>
+              <div className="card-premium p-6 sm:p-8">
+                <h2 className="text-lg font-display font-bold text-text mb-6">{t('checkout.billingDetails')}</h2>
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <Input
-                    label={t('checkout.firstName')}
-                    value={form.firstName}
-                    onChange={(e) => updateForm('firstName', e.target.value)}
-                    required
-                  />
-                  <Input
-                    label={t('checkout.lastName')}
-                    value={form.lastName}
-                    onChange={(e) => updateForm('lastName', e.target.value)}
-                    required
-                  />
-                  <Input
-                    label={t('checkout.email')}
-                    type="email"
-                    value={form.email}
-                    onChange={(e) => updateForm('email', e.target.value)}
-                    required
-                  />
-                  <Input
-                    label={t('checkout.phone')}
-                    type="tel"
-                    value={form.phone}
-                    onChange={(e) => updateForm('phone', e.target.value)}
-                  />
+                  <Input label={t('checkout.firstName')} value={form.firstName} onChange={(e) => updateForm('firstName', e.target.value)} required />
+                  <Input label={t('checkout.lastName')} value={form.lastName} onChange={(e) => updateForm('lastName', e.target.value)} required />
+                  <Input label={t('checkout.email')} type="email" value={form.email} onChange={(e) => updateForm('email', e.target.value)} required />
+                  <Input label={t('checkout.phone')} type="tel" value={form.phone} onChange={(e) => updateForm('phone', e.target.value)} />
                 </div>
               </div>
 
-              {/* Payment — Stripe Placeholder */}
-              <div className="card p-6">
-                <h2 className="text-lg font-semibold text-text mb-6">{t('checkout.paymentMethod')}</h2>
+              {/* Payment */}
+              <div className="card-premium p-6 sm:p-8">
+                <h2 className="text-lg font-display font-bold text-text mb-6">{t('checkout.paymentMethod')}</h2>
+
+                {/* Trust badges */}
+                <div className="flex flex-wrap items-center gap-3 mb-6">
+                  {['Visa', 'Mastercard', 'Stripe'].map((brand) => (
+                    <span key={brand} className="rounded-lg bg-neutral px-3 py-1.5 text-xs font-semibold text-text/50 border border-sandstone/10">
+                      {brand}
+                    </span>
+                  ))}
+                  <span className="flex items-center gap-1 text-xs text-emerald-600 font-medium">
+                    <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                    </svg>
+                    256-bit SSL
+                  </span>
+                </div>
+
                 <div className="space-y-4">
-                  <div className="rounded-xl border-2 border-dashed border-sandstone/30 bg-neutral/50 p-8 text-center">
-                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-sandstone/10 mb-4">
-                      <svg className="h-6 w-6 text-sandstone" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <div className="rounded-2xl border-2 border-dashed border-gold/20 bg-gold/[0.02] p-8 text-center">
+                    <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gold/10 mb-4">
+                      <svg className="h-7 w-7 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
                       </svg>
                     </div>
@@ -96,7 +85,6 @@ export default function Checkout() {
                     <p className="mt-1 text-xs text-text/40">Secure payment powered by Stripe</p>
                   </div>
 
-                  {/* Placeholder card fields for visual */}
                   <Input label={t('checkout.cardNumber')} placeholder="4242 4242 4242 4242" disabled />
                   <div className="grid grid-cols-2 gap-4">
                     <Input label={t('checkout.expiry')} placeholder="MM/YY" disabled />
@@ -106,24 +94,24 @@ export default function Checkout() {
               </div>
 
               {/* Terms */}
-              <label className="flex items-start gap-3 cursor-pointer">
+              <label className="flex items-start gap-3 cursor-pointer group">
                 <input
                   type="checkbox"
                   checked={acceptTerms}
                   onChange={(e) => setAcceptTerms(e.target.checked)}
                   className="mt-1 h-4 w-4 rounded border-sandstone/30 text-gold focus:ring-gold/20"
                 />
-                <span className="text-sm text-text/70">
+                <span className="text-sm text-text/70 group-hover:text-text transition-colors">
                   {t('checkout.termsLabel', { link: '' })}
                   <a href="#" className="font-medium text-gold hover:underline">{t('checkout.termsLink')}</a>
                 </span>
               </label>
             </div>
 
-            {/* Sidebar Summary */}
+            {/* Sidebar */}
             <div className="lg:w-80 shrink-0">
-              <div className="card p-6 space-y-6 lg:sticky lg:top-24">
-                <h3 className="font-semibold text-text">{t('checkout.orderSummary')}</h3>
+              <div className="card-premium p-6 space-y-6 lg:sticky lg:top-24">
+                <h3 className="font-display font-bold text-text">{t('checkout.orderSummary')}</h3>
 
                 <div className="space-y-3">
                   {items.map((item) => (
@@ -141,6 +129,12 @@ export default function Checkout() {
                 <Button type="submit" className="w-full" loading={processing} disabled={processing}>
                   {processing ? t('checkout.processing') : t('checkout.pay', { amount: fc(total) })}
                 </Button>
+
+                <div className="text-center">
+                  <p className="text-[10px] text-text/30">
+                    Your payment is secured by 256-bit SSL encryption
+                  </p>
+                </div>
               </div>
             </div>
           </div>

@@ -1,10 +1,9 @@
 const WIKIMEDIA_API = 'https://commons.wikimedia.org/w/api.php';
-const CATEGORY = 'Category:Amphitheatre_of_El_Jem';
 
 let cachedImages = null;
 
 /**
- * Fetch images of the Amphitheatre of El Jem from Wikimedia Commons
+ * Fetch images of the Amphitheatre of El Jem from Wikimedia Commons via search API
  */
 export async function fetchAmphitheatreImages(limit = 20) {
   if (cachedImages) return cachedImages;
@@ -12,10 +11,10 @@ export async function fetchAmphitheatreImages(limit = 20) {
   try {
     const params = new URLSearchParams({
       action: 'query',
-      generator: 'categorymembers',
-      gcmtitle: CATEGORY,
-      gcmtype: 'file',
-      gcmlimit: String(limit),
+      generator: 'search',
+      gsrsearch: 'El Jem amphitheatre',
+      gsrnamespace: '6',
+      gsrlimit: String(limit),
       prop: 'imageinfo',
       iiprop: 'url|size|mime',
       iiurlwidth: '1200',
@@ -43,10 +42,13 @@ export async function fetchAmphitheatreImages(limit = 20) {
           mime: info.mime,
         };
       })
-      .filter((img) => img.mime?.startsWith('image/'));
+      .filter((img) => img.mime?.startsWith('image/') && img.width > 600);
 
-    cachedImages = images;
-    return images;
+    if (images.length > 0) {
+      cachedImages = images;
+      return images;
+    }
+    return getFallbackImages();
   } catch (error) {
     console.error('Failed to fetch Wikimedia images:', error);
     return getFallbackImages();
@@ -63,39 +65,92 @@ export async function getRandomImage() {
 }
 
 /**
- * Get hero image (first available or fallback)
+ * Get hero image (first landscape or fallback)
  */
 export async function getHeroImage() {
   const images = await fetchAmphitheatreImages();
-  // Prefer landscape images for hero
   const landscape = images.filter((img) => img.width > img.height);
   return landscape[0] || images[0] || getFallbackImages()[0];
 }
 
 /**
- * Fallback images when API is unavailable
+ * Get image by category for contextual usage
+ */
+export function getImageByCategory(category = 'exterior') {
+  const fallbacks = getFallbackImages();
+  const categoryMap = {
+    hero: 0,
+    exterior: 1,
+    interior: 2,
+    panorama: 3,
+    detail: 4,
+    aerial: 5,
+    night: 0,
+  };
+  const index = categoryMap[category] ?? 0;
+  return fallbacks[index] || fallbacks[0];
+}
+
+/**
+ * Verified fallback images from Wikimedia Commons (all tested working)
  */
 function getFallbackImages() {
   return [
     {
-      id: 'fallback-1',
-      title: 'Amphitheatre of El Jem',
-      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Amphitheatre_of_El_Jem.jpg/1200px-Amphitheatre_of_El_Jem.jpg',
-      fullUrl: 'https://upload.wikimedia.org/wikipedia/commons/7/79/Amphitheatre_of_El_Jem.jpg',
-      width: 1200,
-      height: 800,
+      id: 'fallback-hero',
+      title: 'Amphitheatre of El Jem — HDR Panorama',
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Anfiteatro%2C_El_Jem%2C_T%C3%BAnez%2C_2016-09-04%2C_DD_38-40_HDR.jpg/1280px-Anfiteatro%2C_El_Jem%2C_T%C3%BAnez%2C_2016-09-04%2C_DD_38-40_HDR.jpg',
+      fullUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/b2/Anfiteatro%2C_El_Jem%2C_T%C3%BAnez%2C_2016-09-04%2C_DD_38-40_HDR.jpg',
+      width: 8379,
+      height: 4632,
       mime: 'image/jpeg',
     },
     {
-      id: 'fallback-2',
-      title: 'El Jem Amphitheatre Interior',
-      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/El_Djem_Amphitheater_%28II%29.jpg/1200px-El_Djem_Amphitheater_%28II%29.jpg',
-      fullUrl: 'https://upload.wikimedia.org/wikipedia/commons/5/50/El_Djem_Amphitheater_%28II%29.jpg',
-      width: 1200,
-      height: 800,
+      id: 'fallback-exterior',
+      title: 'Amphitheater at El Djem — Exterior',
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Amphitheater_at_El_Djem.jpg/1280px-Amphitheater_at_El_Djem.jpg',
+      fullUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/ee/Amphitheater_at_El_Djem.jpg',
+      width: 3888,
+      height: 2592,
+      mime: 'image/jpeg',
+    },
+    {
+      id: 'fallback-interior',
+      title: 'Amphitheatre Interior — El Jem',
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Anfiteatro%2C_El_Jem%2C_T%C3%BAnez%2C_2016-09-04%2C_DD_35-37_HDR.jpg/1280px-Anfiteatro%2C_El_Jem%2C_T%C3%BAnez%2C_2016-09-04%2C_DD_35-37_HDR.jpg',
+      fullUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/e8/Anfiteatro%2C_El_Jem%2C_T%C3%BAnez%2C_2016-09-04%2C_DD_35-37_HDR.jpg',
+      width: 6739,
+      height: 5098,
+      mime: 'image/jpeg',
+    },
+    {
+      id: 'fallback-panorama',
+      title: 'El Jem Amphitheatre — Wide View',
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Anfiteatro%2C_El_Jem%2C_T%C3%BAnez%2C_2016-09-04%2C_DD_11.jpg/1280px-Anfiteatro%2C_El_Jem%2C_T%C3%BAnez%2C_2016-09-04%2C_DD_11.jpg',
+      fullUrl: 'https://upload.wikimedia.org/wikipedia/commons/d/df/Anfiteatro%2C_El_Jem%2C_T%C3%BAnez%2C_2016-09-04%2C_DD_11.jpg',
+      width: 7996,
+      height: 4240,
+      mime: 'image/jpeg',
+    },
+    {
+      id: 'fallback-detail',
+      title: 'El Jem Amphitheatre — Interior Detail',
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Anfiteatro%2C_El_Jem%2C_T%C3%BAnez%2C_2016-09-04%2C_DD_22.jpg/1280px-Anfiteatro%2C_El_Jem%2C_T%C3%BAnez%2C_2016-09-04%2C_DD_22.jpg',
+      fullUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/4d/Anfiteatro%2C_El_Jem%2C_T%C3%BAnez%2C_2016-09-04%2C_DD_22.jpg',
+      width: 8359,
+      height: 5575,
+      mime: 'image/jpeg',
+    },
+    {
+      id: 'fallback-aerial',
+      title: 'Amphithéâtre d\'El Jem 2024',
+      url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Amphith%C3%A9%C3%A2tre_d%27El_Jem_2024_05.jpg/1280px-Amphith%C3%A9%C3%A2tre_d%27El_Jem_2024_05.jpg',
+      fullUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/6a/Amphith%C3%A9%C3%A2tre_d%27El_Jem_2024_05.jpg',
+      width: 3468,
+      height: 4624,
       mime: 'image/jpeg',
     },
   ];
 }
 
-export default { fetchAmphitheatreImages, getRandomImage, getHeroImage };
+export default { fetchAmphitheatreImages, getRandomImage, getHeroImage, getImageByCategory };

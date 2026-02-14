@@ -46,13 +46,13 @@ export default function OrderDetail({ order: propOrder }) {
         <div className="card p-6 mb-6">
           <h3 className="font-semibold text-text mb-4">{t('account.tickets')}</h3>
           <div className="space-y-4">
-            {order.tickets.map((ticket) => (
+            {(order?.tickets || []).map((ticket) => (
               <div key={ticket.id} className="flex items-center justify-between py-3 border-b border-sandstone/10 last:border-0">
                 <div>
-                  <p className="font-medium text-text text-sm">{ticket.eventTitle}</p>
-                  <p className="text-xs text-text/50 mt-0.5">{ticket.zone} × {ticket.quantity} — {fd(ticket.eventDate)}</p>
+                  <p className="font-medium text-text text-sm">{ticket?.eventTitle || ticket?.type || '—'}</p>
+                  <p className="text-xs text-text/50 mt-0.5">{ticket?.zone || '—'} × {ticket?.quantity || 1} — {ticket?.eventDate ? fd(ticket.eventDate) : '—'}</p>
                 </div>
-                <span className="font-semibold text-text text-sm">{fc(ticket.unitPrice * ticket.quantity)}</span>
+                <span className="font-semibold text-text text-sm">{fc((ticket?.unitPrice || 0) * (ticket?.quantity || 1))}</span>
               </div>
             ))}
           </div>
@@ -64,11 +64,11 @@ export default function OrderDetail({ order: propOrder }) {
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-text/60">{t('checkout.paymentMethod')}</span>
-              <span className="text-text">{order.payment.method}</span>
+              <span className="text-text">{order?.payment?.method || '—'}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-text/60">{t('program.date')}</span>
-              <span className="text-text">{fd(order.payment.date)}</span>
+              <span className="text-text">{order?.payment?.date ? fd(order.payment.date) : '—'}</span>
             </div>
           </div>
         </div>

@@ -75,6 +75,7 @@ const demoEvent = {
 const demoOrder = {
   id: 'ORD-20260715-001',
   status: 'paid',
+  date: '2026-07-10T14:30:00',
   createdAt: '2026-07-10T14:30:00',
   event: demoEvent,
   items: [
@@ -82,12 +83,14 @@ const demoOrder = {
     { ticketType: 'Tribune VIP', quantity: 1, unitPrice: 120 },
   ],
   subtotal: 210,
+  fees: 10.5,
   serviceFees: 10.5,
   total: 220.5,
+  payment: { method: 'Visa ending in 4242', date: '2026-07-10T14:35:00' },
   tickets: [
-    { id: 'TK-001', type: 'Gradins', status: 'valid', qrCode: 'demo-qr-1' },
-    { id: 'TK-002', type: 'Gradins', status: 'valid', qrCode: 'demo-qr-2' },
-    { id: 'TK-003', type: 'Tribune VIP', status: 'used', qrCode: 'demo-qr-3' },
+    { id: 'TK-001', eventTitle: 'Orchestre Symphonique de Tunis', zone: 'Gradins', quantity: 2, unitPrice: 45, eventDate: '2026-07-15T20:30:00', type: 'Gradins', status: 'valid', qrCode: 'demo-qr-1' },
+    { id: 'TK-002', eventTitle: 'Orchestre Symphonique de Tunis', zone: 'Gradins', quantity: 2, unitPrice: 45, eventDate: '2026-07-15T20:30:00', type: 'Gradins', status: 'valid', qrCode: 'demo-qr-2' },
+    { id: 'TK-003', eventTitle: 'Orchestre Symphonique de Tunis', zone: 'Tribune VIP', quantity: 1, unitPrice: 120, eventDate: '2026-07-15T20:30:00', type: 'Tribune VIP', status: 'used', qrCode: 'demo-qr-3' },
   ],
 };
 
